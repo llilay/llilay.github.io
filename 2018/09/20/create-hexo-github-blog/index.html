@@ -18,16 +18,18 @@
 <meta name="description" content="第一篇文章记录一下自己使用hexo+github搭建博客的过程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用hexo+github免费搭建个人博客网站">
-<meta property="og:url" content="http://yoursite.com/2018/09/19/hello-world/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/index.html">
 <meta property="og:site_name" content="llilay&#39;s blog">
 <meta property="og:description" content="第一篇文章记录一下自己使用hexo+github搭建博客的过程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/09/19/hello-world/git-version.png">
-<meta property="og:updated_time" content="2018-09-19T09:31:00.569Z">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/git-version.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/node.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/deploy.png">
+<meta property="og:updated_time" content="2018-09-20T02:15:17.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用hexo+github免费搭建个人博客网站">
 <meta name="twitter:description" content="第一篇文章记录一下自己使用hexo+github搭建博客的过程">
-<meta name="twitter:image" content="http://yoursite.com/2018/09/19/hello-world/git-version.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/git-version.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -270,11 +272,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-create-hexo-github-blog" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2018/09/19/hello-world/" class="article-date">
-      <time datetime="2018-09-19T09:31:00.567Z" itemprop="datePublished">2018-09-19</time>
+      <a href="/2018/09/20/create-hexo-github-blog/" class="article-date">
+      <time datetime="2018-09-20T02:14:26.000Z" itemprop="datePublished">2018-09-20</time>
 </a>
 
 
@@ -320,16 +322,47 @@
 </ul>
 <h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h3><ul>
 <li>下载git安装包<br> <a href="https://github.com/git-for-windows/git/releases/download/v2.19.0.windows.1/Git-2.19.0-32-bit.exe" target="_blank" rel="noopener">Git-2.19.0-32-bit.exe</a><br> <a href="https://github.com/git-for-windows/git/releases/download/v2.19.0.windows.1/Git-2.19.0-64-bit.exe" target="_blank" rel="noopener">Git-2.19.0-64-bit.exe</a></li>
-<li>检测安装是否成功<br>打开cmd命令行(win+r 输入cmd回车)执行 git –version<br><img src="git-version.png" alt="" title="git 安装成功"></li>
+<li>检测安装是否成功<br>打开cmd命令行(win+r 输入cmd回车)执行 git –version<br><img src="/2018/09/20/create-hexo-github-blog/git-version.png" alt="git安装成功图片" title="git 安装成功"><br>出现图片里的信息就说明安装成功</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><ul>
+<li>安装 Node.js安装包<br><a href="https://nodejs.org/dist/v8.12.0/node-v8.12.0-x86.msi" target="_blank" rel="noopener">node-v8.12.0-x86.msi(32位)</a><br><a href="https://nodejs.org/dist/v8.12.0/node-v8.12.0-x64.msi" target="_blank" rel="noopener">node-v8.12.0-x64.msi(64位)</a></li>
+<li>检测安装是否成功<pre><code>npm会随着Node.js自动安装
+</code></pre>打开cmd命令行(win+r 输入cmd回车)分别执行 node -v 和 npm -v</li>
+</ul>
+<p><img src="/2018/09/20/create-hexo-github-blog/node.png" alt="node安装成功图片" title="node 安装成功"><br>出现图片里的信息就说明安装成功</p>
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<h3 id="初始化-Hexo"><a href="#初始化-Hexo" class="headerlink" title="初始化 Hexo"></a>初始化 Hexo</h3><p>安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<h3 id="部署到-Git"><a href="#部署到-Git" class="headerlink" title="部署到 Git"></a>部署到 Git</h3><ul>
+<li><p>创建GitHub仓库</p>
+</li>
+<li><p>部署</p>
+</li>
+</ul>
+<p>修改我们的的站点配置文件_config.yml中如下字段</p>
+<p><img src="/2018/09/20/create-hexo-github-blog/deploy.png" alt=""></p>
+<p>其中：</p>
+<ul>
+<li>type 部署的服务器类型，这里填写git就可以。</li>
+<li>repo 你的仓库地址</li>
+<li>branch 默认值为master</li>
+</ul>
+<p>以上配置完成后保存 然后项目根目录执行下面的命令安装一个插件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后在终端中依次执行如下代码</p>
+<ul>
+<li>hexo clean 清理缓存</li>
+</ul>
+<ul>
+<li>hexo generate 简写 hexo g 进行渲染, 会生成静态文件</li>
+</ul>
+<ul>
+<li>hexo server 简写 hexo s 启动服务器。默认情况下，访问网址为： <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></li>
+</ul>
+<ul>
+<li>hexo deploy 简写为 hexo d 部署到git</li>
+</ul>
+<h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h3><p>选择一个自己喜欢的<a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题</a></p>
 </the>
       
     </div>
@@ -338,13 +371,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/19/hello-world/">使用hexo+github免费搭建个人博客网站</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/20/create-hexo-github-blog/">使用hexo+github免费搭建个人博客网站</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">llilay</a></p>
-        <p><span>发布时间:</span>2018-09-19, 17:31:00</p>
-        <p><span>最后更新:</span>2018-09-19, 17:31:00</p>
+        <p><span>发布时间:</span>2018-09-20, 10:14:26</p>
+        <p><span>最后更新:</span>2018-09-20, 10:15:17</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/19/hello-world/" title="使用hexo+github免费搭建个人博客网站">http://yoursite.com/2018/09/19/hello-world/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/19/hello-world/　　作者: llilay" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/20/create-hexo-github-blog/" title="使用hexo+github免费搭建个人博客网站">http://yoursite.com/2018/09/20/create-hexo-github-blog/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/20/create-hexo-github-blog/　　作者: llilay" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -358,8 +391,8 @@
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/19/post-name/">
-                    post_name
+                <a href="/2018/09/18/我的博客/">
+                    我的博客
                 </a>
             </div>
         
@@ -371,7 +404,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤"><span class="toc-number">1.</span> <span class="toc-text">步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Git"><span class="toc-number">1.1.</span> <span class="toc-text">安装 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤"><span class="toc-number">1.</span> <span class="toc-text">步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Git"><span class="toc-number">1.1.</span> <span class="toc-text">安装 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Node-js"><span class="toc-number">1.2.</span> <span class="toc-text">安装 Node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Hexo"><span class="toc-number">1.3.</span> <span class="toc-text">安装 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化-Hexo"><span class="toc-number">1.4.</span> <span class="toc-text">初始化 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署到-Git"><span class="toc-number">1.5.</span> <span class="toc-text">部署到 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装主题"><span class="toc-number">1.6.</span> <span class="toc-text">安装主题</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -433,13 +466,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/19/post-name/" title="下一篇: post_name">
+            <a href="/2018/09/18/我的博客/" title="下一篇: 我的博客">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/hello-world/">使用hexo+github免费搭建个人博客网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/19/post-name/">post_name</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/18/我的博客/">我的博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/18/test-my-site/">test_my_site</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/create-hexo-github-blog/">使用hexo+github免费搭建个人博客网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/18/我的博客/">我的博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/18/test-my-site/">test_my_site</a></li></ul>
 
 
 
