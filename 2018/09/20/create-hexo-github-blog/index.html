@@ -16,6 +16,7 @@
 
 
 <meta name="description" content="第一篇文章记录一下自己使用hexo+github搭建博客的过程">
+<meta name="keywords" content="Hexo,github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用hexo+github免费搭建个人博客网站">
 <meta property="og:url" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/index.html">
@@ -24,8 +25,12 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/git-version.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/node.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/directory.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/create_git.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/deploy.png">
-<meta property="og:updated_time" content="2018-09-20T02:15:17.274Z">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/themes.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/create-hexo-github-blog/change_themes.png">
+<meta property="og:updated_time" content="2018-09-20T03:17:46.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用hexo+github免费搭建个人博客网站">
 <meta name="twitter:description" content="第一篇文章记录一下自己使用hexo+github搭建博客的过程">
@@ -182,9 +187,9 @@
                     <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa Email" href="/mosjyukai@gmail.com" title="Email"></a>
                             
-                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                                <a class="fa GitHub" href="https://github.com/llilay" title="GitHub"></a>
                             
                                 <a class="fa RSS" href="/atom.xml" title="RSS"></a>
                             
@@ -195,7 +200,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li></ul>
                     </div>
                 </section>
                 
@@ -260,9 +265,9 @@
             <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa Email" target="_blank" href="/mosjyukai@gmail.com" title="Email"></a>
                             
-                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                                <a class="fa GitHub" target="_blank" href="https://github.com/llilay" title="GitHub"></a>
                             
                                 <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
                             
@@ -299,8 +304,16 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+    </div>
+
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -318,34 +331,56 @@
 <li>初始化 Hexo</li>
 <li>部署到 Git</li>
 <li>安装主题</li>
-<li>写文章</li>
+<li>创建文章</li>
 </ul>
 <h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h3><ul>
-<li>下载git安装包<br> <a href="https://github.com/git-for-windows/git/releases/download/v2.19.0.windows.1/Git-2.19.0-32-bit.exe" target="_blank" rel="noopener">Git-2.19.0-32-bit.exe</a><br> <a href="https://github.com/git-for-windows/git/releases/download/v2.19.0.windows.1/Git-2.19.0-64-bit.exe" target="_blank" rel="noopener">Git-2.19.0-64-bit.exe</a></li>
-<li>检测安装是否成功<br>打开cmd命令行(win+r 输入cmd回车)执行 git –version<br><img src="/2018/09/20/create-hexo-github-blog/git-version.png" alt="git安装成功图片" title="git 安装成功"><br>出现图片里的信息就说明安装成功</li>
+<li>下载git安装包</li>
 </ul>
+<p><a href="https://github.com/git-for-windows/git/releases/download/v2.19.0.windows.1/Git-2.19.0-32-bit.exe" target="_blank" rel="noopener">Git-2.19.0-32-bit.exe</a><br><a href="https://github.com/git-for-windows/git/releases/download/v2.19.0.windows.1/Git-2.19.0-64-bit.exe" target="_blank" rel="noopener">Git-2.19.0-64-bit.exe</a></p>
+<ul>
+<li>检测安装是否成功</li>
+</ul>
+<p>打开cmd命令行(win+r 输入cmd回车)执行 git –version<br><img src="/2018/09/20/create-hexo-github-blog/git-version.png" alt="git安装成功图片" title="git 安装成功"><br>出现图片里的信息就说明安装成功</p>
 <h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><ul>
-<li>安装 Node.js安装包<br><a href="https://nodejs.org/dist/v8.12.0/node-v8.12.0-x86.msi" target="_blank" rel="noopener">node-v8.12.0-x86.msi(32位)</a><br><a href="https://nodejs.org/dist/v8.12.0/node-v8.12.0-x64.msi" target="_blank" rel="noopener">node-v8.12.0-x64.msi(64位)</a></li>
-<li>检测安装是否成功<pre><code>npm会随着Node.js自动安装
-</code></pre>打开cmd命令行(win+r 输入cmd回车)分别执行 node -v 和 npm -v</li>
+<li>安装 Node.js安装包</li>
 </ul>
+<p><a href="https://nodejs.org/dist/v8.12.0/node-v8.12.0-x86.msi" target="_blank" rel="noopener">node-v8.12.0-x86.msi(32位)</a><br><a href="https://nodejs.org/dist/v8.12.0/node-v8.12.0-x64.msi" target="_blank" rel="noopener">node-v8.12.0-x64.msi(64位)</a></p>
+<ul>
+<li>检测安装是否成功</li>
+</ul>
+<pre><code>npm会随着Node.js自动安装
+</code></pre><p>打开cmd命令行(win+r 输入cmd回车)分别执行 node -v 和 npm -v</p>
 <p><img src="/2018/09/20/create-hexo-github-blog/node.png" alt="node安装成功图片" title="node 安装成功"><br>出现图片里的信息就说明安装成功</p>
 <h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 <h3 id="初始化-Hexo"><a href="#初始化-Hexo" class="headerlink" title="初始化 Hexo"></a>初始化 Hexo</h3><p>安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<p>新建完成后，指定文件夹的目录如下：<br><img src="/2018/09/20/create-hexo-github-blog/directory.png" alt=""></p>
+<ul>
+<li>_config.yml</li>
+</ul>
+<p>网站的 配置 信息，您可以在此配置大部分的参数。</p>
+<ul>
+<li>source</li>
+</ul>
+<p>资源文件夹是存放用户资源的地方。除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
+<ul>
+<li>themes</li>
+</ul>
+<p>主题 文件夹。Hexo 会根据主题来生成静态页面。我们下载的主题会放在这个文件夹</p>
 <h3 id="部署到-Git"><a href="#部署到-Git" class="headerlink" title="部署到 Git"></a>部署到 Git</h3><ul>
-<li><p>创建GitHub仓库</p>
-</li>
-<li><p>部署</p>
-</li>
+<li>创建GitHub仓库</li>
+</ul>
+<p>在github上新建一个名为 YourgithubName.github.io 的远程仓库, 例如填写wapchief.github.io以后, 在地址栏直接输入wapchief.github.io就可以访问网站<br><img src="/2018/09/20/create-hexo-github-blog/create_git.png" alt="创建远程github仓库图片" title="创建远程github仓库"></p>
+<ul>
+<li>部署</li>
 </ul>
 <p>修改我们的的站点配置文件_config.yml中如下字段</p>
 <p><img src="/2018/09/20/create-hexo-github-blog/deploy.png" alt=""></p>
 <p>其中：</p>
 <ul>
 <li>type 部署的服务器类型，这里填写git就可以。</li>
-<li>repo 你的仓库地址</li>
+<li>repo 是你的仓库地址, 填写刚刚创建的仓库克隆地址</li>
 <li>branch 默认值为master</li>
 </ul>
 <p>以上配置完成后保存 然后项目根目录执行下面的命令安装一个插件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
@@ -362,7 +397,14 @@
 <ul>
 <li>hexo deploy 简写为 hexo d 部署到git</li>
 </ul>
+<p>就可以用 YourgithubName.github.io 来访问你的博客了</p>
 <h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h3><p>选择一个自己喜欢的<a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题</a></p>
+<p>这里我们以主题 yelee 为例</p>
+<p>在我们的本地博客根目录输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/MOxFIVE/hexo-theme-yelee.git themes/yelee</span><br></pre></td></tr></table></figure></p>
+<p>执行完毕后会看到主题已经安装到对应目录<br><img src="/2018/09/20/create-hexo-github-blog/themes.png" alt=""></p>
+<p>再修改配置文件 _config.yml，即可切换到 Yelee 主题<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: Yelee</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/09/20/create-hexo-github-blog/change_themes.png" alt=""></p>
+<h3 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h3><p>你可以执行下列命令来创建一篇新文章。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &lt;title&gt;</span><br></pre></td></tr></table></figure></p>
 </the>
       
     </div>
@@ -374,7 +416,7 @@
         <p><span>本文标题:</span><a href="/2018/09/20/create-hexo-github-blog/">使用hexo+github免费搭建个人博客网站</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">llilay</a></p>
         <p><span>发布时间:</span>2018-09-20, 10:14:26</p>
-        <p><span>最后更新:</span>2018-09-20, 10:15:17</p>
+        <p><span>最后更新:</span>2018-09-20, 11:17:46</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/09/20/create-hexo-github-blog/" title="使用hexo+github免费搭建个人博客网站">http://yoursite.com/2018/09/20/create-hexo-github-blog/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/20/create-hexo-github-blog/　　作者: llilay" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -387,24 +429,13 @@
 
 
 
-    <nav id="article-nav">
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/09/18/我的博客/">
-                    我的博客
-                </a>
-            </div>
-        
-    </nav>
-
   
 </article>
 
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤"><span class="toc-number">1.</span> <span class="toc-text">步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Git"><span class="toc-number">1.1.</span> <span class="toc-text">安装 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Node-js"><span class="toc-number">1.2.</span> <span class="toc-text">安装 Node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Hexo"><span class="toc-number">1.3.</span> <span class="toc-text">安装 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化-Hexo"><span class="toc-number">1.4.</span> <span class="toc-text">初始化 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署到-Git"><span class="toc-number">1.5.</span> <span class="toc-text">部署到 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装主题"><span class="toc-number">1.6.</span> <span class="toc-text">安装主题</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤"><span class="toc-number">1.</span> <span class="toc-text">步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Git"><span class="toc-number">1.1.</span> <span class="toc-text">安装 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Node-js"><span class="toc-number">1.2.</span> <span class="toc-text">安装 Node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-Hexo"><span class="toc-number">1.3.</span> <span class="toc-text">安装 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化-Hexo"><span class="toc-number">1.4.</span> <span class="toc-text">初始化 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署到-Git"><span class="toc-number">1.5.</span> <span class="toc-text">部署到 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装主题"><span class="toc-number">1.6.</span> <span class="toc-text">安装主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建文章"><span class="toc-number">1.7.</span> <span class="toc-text">创建文章</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -466,13 +497,11 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2018/09/18/我的博客/" title="下一篇: 我的博客">
-                <i class="fa fa-angle-right"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/create-hexo-github-blog/">使用hexo+github免费搭建个人博客网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/18/我的博客/">我的博客</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/18/test-my-site/">test_my_site</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/create-hexo-github-blog/">使用hexo+github免费搭建个人博客网站</a></li></ul>
 
 
 
