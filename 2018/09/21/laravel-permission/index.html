@@ -15,15 +15,25 @@
 
 
 
+<meta name="description" content="laravel-permission">
 <meta name="keywords" content="Laravel,PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Laravel多角色用户权限 —— 权限管理扩展包`laravel-permission`">
+<meta property="og:title" content="Laravel多角色用户权限 —— 权限管理扩展包&quot;laravel-permission&quot;">
 <meta property="og:url" content="http://yoursite.com/2018/09/21/laravel-permission/index.html">
 <meta property="og:site_name" content="llilay&#39;s blog">
+<meta property="og:description" content="laravel-permission">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-21T02:19:07.983Z">
+<meta property="og:image" content="http://yoursite.com/2018/09/21/laravel-permission/roles.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/21/laravel-permission/permissions.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/21/laravel-permission/role_has_permissions.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/21/laravel-permission/model_has_roles.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/21/laravel-permission/model_has_permissions.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/21/laravel-permission/permission_table.png">
+<meta property="og:updated_time" content="2018-09-21T03:31:32.713Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Laravel多角色用户权限 —— 权限管理扩展包`laravel-permission`">
+<meta name="twitter:title" content="Laravel多角色用户权限 —— 权限管理扩展包&quot;laravel-permission&quot;">
+<meta name="twitter:description" content="laravel-permission">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/21/laravel-permission/roles.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -55,7 +65,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Laravel多角色用户权限 —— 权限管理扩展包`laravel-permission` | llilay&#39;s blog</title>
+<title>Laravel多角色用户权限 —— 权限管理扩展包&#34;laravel-permission&#34; | llilay&#39;s blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -285,7 +295,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Laravel多角色用户权限 —— 权限管理扩展包`laravel-permission`
+      Laravel多角色用户权限 —— 权限管理扩展包&#34;laravel-permission&#34;
     </h1>
   
 
@@ -310,10 +320,63 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <excerpt in="" index="" |="" 首页摘要="">
+        <p><excerpt in="" index="" |="" 首页摘要=""><br><a href="https://github.com/spatie/laravel-permission" target="_blank" rel="noopener">laravel-permission</a><br><a id="more"></a></excerpt></p>
+<the rest="" of="" contents="" |="" 余下全文="">
 
-<a id="more"></a>
-<the rest="" of="" contents="" |="" 余下全文=""></the></excerpt>
+<h2 id="安装扩展包"><a href="#安装扩展包" class="headerlink" title="安装扩展包"></a>安装扩展包</h2><p>通过 Composer 安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer require <span class="string">"spatie/laravel-permission:~2.7"</span></span><br></pre></td></tr></table></figure>
+<p>在Laravel 5.5中，服务提供商将自动注册。在旧版本的框架中，只需在config / app.php文件中添加服务提供程序：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'providers'</span> =&gt; [</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    Spatie\Permission\PermissionServiceProvider::class,</span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
+<p>生成数据库迁移文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan vendor:publish --provider=<span class="string">"Spatie\Permission\PermissionServiceProvider"</span> --tag=<span class="string">"migrations"</span></span><br></pre></td></tr></table></figure>
+<p>使用以下命令应用数据迁移：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan migrate</span><br></pre></td></tr></table></figure>
+<p>生成配置信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan vendor:publish --provider=<span class="string">"Spatie\Permission\PermissionServiceProvider"</span> --tag=<span class="string">"config"</span></span><br></pre></td></tr></table></figure>
+<p>执行数据库迁移之后会生成 5 张表:</p>
+<ul>
+<li><code>roles</code> —— 角色的模型表；角色表</li>
+</ul>
+<p><img src="/2018/09/21/laravel-permission/roles.png" alt=""></p>
+<ul>
+<li><code>permissions</code> —— 权限的模型表；权限表</li>
+</ul>
+<p><img src="/2018/09/21/laravel-permission/permissions.png" alt=""></p>
+<ul>
+<li><code>role_has_permissions</code> —— 角色拥有的权限关联表，如管理员拥有查看后台的权限都是在此表定义，一个角色能拥有多个权限；</li>
+</ul>
+<p><img src="/2018/09/21/laravel-permission/role_has_permissions.png" alt=""></p>
+<ul>
+<li><code>model_has_roles</code> —— 模型与角色的关联表，用户拥有什么角色在此表中定义，一个用户能拥有多个角色；</li>
+</ul>
+<p><img src="/2018/09/21/laravel-permission/model_has_roles.png" alt=""></p>
+<ul>
+<li><code>model_has_permissions</code> —— 模型与权限关联表，一个模型能拥有多个权限。</li>
+</ul>
+<p><img src="/2018/09/21/laravel-permission/model_has_permissions.png" alt=""><br>从最后一张表中可以看出，laravel-permission 允许用户跳过角色，直接拥有权限。</p>
+<p>下图是 laravel-permission 的数据库表结构：<br><img src="/2018/09/21/laravel-permission/permission_table.png" alt=""></p>
+<h2 id="加载-HasRoles"><a href="#加载-HasRoles" class="headerlink" title="加载 HasRoles"></a>加载 HasRoles</h2><blockquote>
+<p>我们还需在 User 中使用 laravel-permission 提供的 Trait —— HasRoles，此举能让我们获取到扩展包提供的所有权限和角色的操作方法。</p>
+</blockquote>
+<p>app/Models/User.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line"><span class="keyword">use</span> <span class="title">Spatie</span>\<span class="title">Permission</span>\<span class="title">Traits</span>\<span class="title">HasRoles</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Authenticatable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">HasRoles</span>;</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="简单用法"><a href="#简单用法" class="headerlink" title="简单用法"></a>简单用法</h2><p><code>新建角色</code>:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">Spatie</span>\<span class="title">Permission</span>\<span class="title">Models</span>\<span class="title">Role</span>;</span><br><span class="line">$role = Role::create([<span class="string">'name'</span> =&gt; <span class="string">'Founder'</span>]);</span><br></pre></td></tr></table></figure></p>
+<p><code>为角色添加权限</code>：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">Spatie</span>\<span class="title">Permission</span>\<span class="title">Models</span>\<span class="title">Permission</span>;</span><br><span class="line"></span><br><span class="line">Permission::create([<span class="string">'name'</span> =&gt; <span class="string">'manage_contents'</span>]);</span><br><span class="line">$role-&gt;givePermissionTo(<span class="string">'manage_contents'</span>);</span><br></pre></td></tr></table></figure></p>
+<p><code>赋予用户某个角色</code>：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单个角色</span></span><br><span class="line">$user-&gt;assignRole(<span class="string">'Founder'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多个角色</span></span><br><span class="line">$user-&gt;assignRole(<span class="string">'writer'</span>, <span class="string">'admin'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数组形式的多个角色</span></span><br><span class="line">$user-&gt;assignRole([<span class="string">'writer'</span>, <span class="string">'admin'</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>我们可以使用以下方法来<code>检查用户角色</code>：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 是否是站长</span></span><br><span class="line">$user-&gt;hasRole(<span class="string">'Founder'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 是否拥有至少一个角色</span></span><br><span class="line">$user-&gt;hasAnyRole(Role::all());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 是否拥有所有角色</span></span><br><span class="line">$user-&gt;hasAllRoles(Role::all());</span><br></pre></td></tr></table></figure></p>
+<p><code>检查权限</code>：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检查用户是否有某个权限</span></span><br><span class="line">$user-&gt;can(<span class="string">'manage_contents'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查角色是否拥有某个权限</span></span><br><span class="line">$role-&gt;hasPermissionTo(<span class="string">'manage_contents'</span>);</span><br></pre></td></tr></table></figure></p>
+<p><code>直接给用户添加权限</code>：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 为用户添加『直接权限』</span></span><br><span class="line">$user-&gt;givePermissionTo(<span class="string">'manage_contents'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取所有直接权限</span></span><br><span class="line">$user-&gt;getDirectPermissions()</span><br></pre></td></tr></table></figure></p>
+<h2 id="初始化角色和权限"><a href="#初始化角色和权限" class="headerlink" title="初始化角色和权限"></a>初始化角色和权限</h2><p>生成初始化数据的迁移文件，遵照命名规范 <code>seed_(数据库表名称)_data</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan make:migration seed_roles_and_permissions_data</span><br></pre></td></tr></table></figure>
+<p>打开迁移文件，书写初始化权限和角色的代码：</p>
+<p>database/migrations/{timestamp}_seed_roles_and_permissions_data.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Schema</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Schema</span>\<span class="title">Blueprint</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Migrations</span>\<span class="title">Migration</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Database</span>\<span class="title">Eloquent</span>\<span class="title">Model</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Spatie</span>\<span class="title">Permission</span>\<span class="title">Models</span>\<span class="title">Role</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Spatie</span>\<span class="title">Permission</span>\<span class="title">Models</span>\<span class="title">Permission</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SeedRolesAndPermissionsData</span> <span class="keyword">extends</span> <span class="title">Migration</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 清除缓存</span></span><br><span class="line">        app()[<span class="string">'cache'</span>]-&gt;forget(<span class="string">'spatie.permission.cache'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先创建权限</span></span><br><span class="line">        Permission::create([<span class="string">'name'</span> =&gt; <span class="string">'manage_contents'</span>]);</span><br><span class="line">        Permission::create([<span class="string">'name'</span> =&gt; <span class="string">'manage_users'</span>]);</span><br><span class="line">        Permission::create([<span class="string">'name'</span> =&gt; <span class="string">'edit_settings'</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建站长角色，并赋予权限</span></span><br><span class="line">        $founder = Role::create([<span class="string">'name'</span> =&gt; <span class="string">'Founder'</span>]);</span><br><span class="line">        $founder-&gt;givePermissionTo(<span class="string">'manage_contents'</span>);</span><br><span class="line">        $founder-&gt;givePermissionTo(<span class="string">'manage_users'</span>);</span><br><span class="line">        $founder-&gt;givePermissionTo(<span class="string">'edit_settings'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建管理员角色，并赋予权限</span></span><br><span class="line">        $maintainer = Role::create([<span class="string">'name'</span> =&gt; <span class="string">'Maintainer'</span>]);</span><br><span class="line">        $maintainer-&gt;givePermissionTo(<span class="string">'manage_contents'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 清除缓存</span></span><br><span class="line">        app()[<span class="string">'cache'</span>]-&gt;forget(<span class="string">'spatie.permission.cache'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 清空所有数据表数据</span></span><br><span class="line">        $tableNames = config(<span class="string">'permission.table_names'</span>);</span><br><span class="line"></span><br><span class="line">        Model::unguard();</span><br><span class="line">        DB::table($tableNames[<span class="string">'role_has_permissions'</span>])-&gt;delete();</span><br><span class="line">        DB::table($tableNames[<span class="string">'model_has_roles'</span>])-&gt;delete();</span><br><span class="line">        DB::table($tableNames[<span class="string">'model_has_permissions'</span>])-&gt;delete();</span><br><span class="line">        DB::table($tableNames[<span class="string">'roles'</span>])-&gt;delete();</span><br><span class="line">        DB::table($tableNames[<span class="string">'permissions'</span>])-&gt;delete();</span><br><span class="line">        Model::reguard();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了测试的方便，我们需要在生成用户填充数据以后，为 1 号和 2 号用户分别指派角色，修改 run() 方法 ：</p>
+<p>database/seeds/UsersTableSeeder.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UsersTableSeeder</span> <span class="keyword">extends</span> <span class="title">Seeder</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化用户角色，将 1 号用户指派为『站长』</span></span><br><span class="line">        $user-&gt;assignRole(<span class="string">'Founder'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将 2 号用户指派为『管理员』</span></span><br><span class="line">        $user = User::find(<span class="number">2</span>);</span><br><span class="line">        $user-&gt;assignRole(<span class="string">'Maintainer'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>assignRole() 方法在 HasRoles 中定义，我们已在 User 模型中加载了它。</p>
+</blockquote>
+<p>接下来刷新下数据库中的测试数据：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan migrate:refresh --seed</span><br></pre></td></tr></table></figure></p>
+</the>
       
     </div>
     
@@ -321,12 +384,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/09/21/laravel-permission/">Laravel多角色用户权限 —— 权限管理扩展包`laravel-permission`</a></p>
+        <p><span>本文标题:</span><a href="/2018/09/21/laravel-permission/">Laravel多角色用户权限 —— 权限管理扩展包&#34;laravel-permission&#34;</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">llilay</a></p>
         <p><span>发布时间:</span>2018-09-21, 10:16:08</p>
-        <p><span>最后更新:</span>2018-09-21, 10:19:07</p>
+        <p><span>最后更新:</span>2018-09-21, 11:31:32</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/09/21/laravel-permission/" title="Laravel多角色用户权限 —— 权限管理扩展包`laravel-permission`">http://yoursite.com/2018/09/21/laravel-permission/</a>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/21/laravel-permission/" title="Laravel多角色用户权限 —— 权限管理扩展包&#34;laravel-permission&#34;">http://yoursite.com/2018/09/21/laravel-permission/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/21/laravel-permission/　　作者: llilay" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -354,7 +417,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装扩展包"><span class="toc-number">1.</span> <span class="toc-text">安装扩展包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加载-HasRoles"><span class="toc-number">2.</span> <span class="toc-text">加载 HasRoles</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单用法"><span class="toc-number">3.</span> <span class="toc-text">简单用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化角色和权限"><span class="toc-number">4.</span> <span class="toc-text">初始化角色和权限</span></a></li></ol>
         
     </div>
     <style>
@@ -390,7 +453,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Laravel多角色用户权限 —— 权限管理扩展包`laravel-permission`　| llilay's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Laravel多角色用户权限 —— 权限管理扩展包"laravel-permission"　| llilay's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -422,7 +485,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/laravel-permission/">Laravel多角色用户权限 —— 权限管理扩展包`laravel-permission`</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/hexo-grammar/">hexo 常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/create-hexo-github-blog/">使用hexo+github免费搭建个人博客网站</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/laravel-permission/">Laravel多角色用户权限 —— 权限管理扩展包"laravel-permission"</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/hexo-grammar/">hexo 常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/create-hexo-github-blog/">使用hexo+github免费搭建个人博客网站</a></li></ul>
 
 
 
