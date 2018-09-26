@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="llilay" />
+
+
+
+<meta name="description" content="easy-sms 是安正超写的一个短信发送组件，利用这个组件，我们可以快速的实现短信发送功能。">
+<meta name="keywords" content="Laravel,PHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="easy-sms 短信发送组件使用笔记">
+<meta property="og:url" content="http://yoursite.com/2018/09/26/easy-sms/index.html">
+<meta property="og:site_name" content="llilay&#39;s blog">
+<meta property="og:description" content="easy-sms 是安正超写的一个短信发送组件，利用这个组件，我们可以快速的实现短信发送功能。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-26T03:09:46.863Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="easy-sms 短信发送组件使用笔记">
+<meta name="twitter:description" content="easy-sms 是安正超写的一个短信发送组件，利用这个组件，我们可以快速的实现短信发送功能。">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="llilay&#39;s blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>easy-sms 短信发送组件使用笔记 | llilay&#39;s blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    };
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">llilay</a></h1>
+        </hgroup>
+
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="https://mail.google.com/mail" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/llilay" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">llilay</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">llilay</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="https://mail.google.com/mail" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/llilay" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-easy-sms" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/09/26/easy-sms/" class="article-date">
+      <time datetime="2018-09-26T02:33:55.000Z" itemprop="datePublished">2018-09-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      easy-sms 短信发送组件使用笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><excerpt in="" index="" |="" 首页摘要=""><br><a href="https://github.com/overtrue/easy-sms" target="_blank" rel="noopener">easy-sms</a> 是安正超写的一个短信发送组件，利用这个组件，我们可以快速的实现短信发送功能。<br><a id="more"></a></excerpt></p>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer require <span class="string">"overtrue/easy-sms"</span></span><br></pre></td></tr></table></figure>
+<p>由于该组件还没有 Laravel 的 ServiceProvider，为了方便使用，我们可以自己封装一下。<br>首先在 config 目录中增加 easysms.php 文件，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ touch config/easysms.php</span><br></pre></td></tr></table></figure></p>
+<p>填入如下内容。<br>config/easysms.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="comment">// HTTP 请求的超时时间（秒）</span></span><br><span class="line">    <span class="string">'timeout'</span> =&gt; <span class="number">5.0</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 默认发送配置</span></span><br><span class="line">    <span class="string">'default'</span> =&gt; [</span><br><span class="line">        <span class="comment">// 网关调用策略，默认：顺序调用</span></span><br><span class="line">        <span class="string">'strategy'</span> =&gt; \Overtrue\EasySms\Strategies\OrderStrategy::class,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 默认可用的发送网关</span></span><br><span class="line">        <span class="string">'gateways'</span> =&gt; [</span><br><span class="line">            <span class="string">'juhe'</span>,</span><br><span class="line">        ],</span><br><span class="line">    ],</span><br><span class="line">    <span class="comment">// 可用的网关配置</span></span><br><span class="line">    <span class="string">'gateways'</span> =&gt; [</span><br><span class="line">        <span class="string">'errorlog'</span> =&gt; [</span><br><span class="line">            <span class="string">'file'</span> =&gt; <span class="string">'/tmp/easy-sms.log'</span>,</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">'juhe'</span> =&gt; [</span><br><span class="line">            <span class="string">'app_key'</span> =&gt; env(<span class="string">'JUHE_APP_KEY'</span>),</span><br><span class="line">        ],</span><br><span class="line">    ],</span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
+<p>然后创建一个 ServiceProvider<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan make:provider EasySmsServiceProvider</span><br></pre></td></tr></table></figure></p>
+<p>修改文件<br>app/providers/EasySmsServiceProvider.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Providers</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Overtrue</span>\<span class="title">EasySms</span>\<span class="title">EasySms</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">ServiceProvider</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EasySmsServiceProvider</span> <span class="keyword">extends</span> <span class="title">ServiceProvider</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Bootstrap the application services.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Register the application services.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">register</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;app-&gt;singleton(EasySms::class, <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> EasySms(config(<span class="string">'easysms'</span>));</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;app-&gt;alias(EasySms::class, <span class="string">'easysms'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后 打开config/app.php 在 providers 中增加 <code>App\Providers\EasySmsServiceProvider::class</code>,大概在174行左右</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">App\Providers\AppServiceProvider::class,</span><br><span class="line">App\Providers\AuthServiceProvider::class,</span><br><span class="line"><span class="comment">// App\Providers\BroadcastServiceProvider::class,</span></span><br><span class="line">App\Providers\EventServiceProvider::class,</span><br><span class="line">App\Providers\RouteServiceProvider::class,</span><br><span class="line"></span><br><span class="line">App\Providers\EasySmsServiceProvider::class,</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+<h2 id="修改-env文件"><a href="#修改-env文件" class="headerlink" title="修改.env文件"></a>修改.env文件</h2><p>在 <code>.env.example</code> 中也加入配置示例定义，提交到版本库，方便以后部署<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 聚合</span></span><br><span class="line">JUHE_APP_KEY=</span><br></pre></td></tr></table></figure></p>
+<p>在 <code>.env</code> 中配置 <code>JUHE_APP_KEY</code>，注意下面需要替换为你自己的 key：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 聚合</span></span><br><span class="line">JUHE_APP_KEY=<span class="number">9</span>d3a7*******************</span><br></pre></td></tr></table></figure></p>
+<h2 id="调试短信"><a href="#调试短信" class="headerlink" title="调试短信"></a>调试短信</h2><p>我们使用 artisan 调试一下，试试能否收到短信。<br>打开 tinker<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan tinker</span><br></pre></td></tr></table></figure></p>
+<p>输入如下代码，注意将 <code>13212345678</code> 替换为你自己的手机。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$easySms = app(<span class="string">'easysms'</span>);</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    $easySms-&gt;send(<span class="number">13212345678</span>, [</span><br><span class="line">        <span class="string">'template'</span> =&gt; <span class="string">'template_id'</span>,</span><br><span class="line">        <span class="string">'data'</span> =&gt; [</span><br><span class="line">            <span class="string">'code'</span> =&gt; <span class="number">1234</span></span><br><span class="line">        ],</span><br><span class="line">    ]);</span><br><span class="line">&#125; <span class="keyword">catch</span> (\Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) &#123;</span><br><span class="line">    $message = $exception-&gt;getException(<span class="string">'juhe'</span>)-&gt;getMessage();</span><br><span class="line">    dd($message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="各短信平台配置说明"><a href="#各短信平台配置说明" class="headerlink" title="各短信平台配置说明"></a>各短信平台配置说明</h2><ul>
+<li><code>阿里云</code></li>
+</ul>
+<p>短信内容使用 template + data</p>
+<pre><code>&apos;aliyun&apos; =&gt; [
+    &apos;access_key_id&apos; =&gt; &apos;&apos;,
+    &apos;access_key_secret&apos; =&gt; &apos;&apos;,
+    &apos;sign_name&apos; =&gt; &apos;&apos;,
+],
+</code></pre><ul>
+<li><code>阿里云Rest</code></li>
+</ul>
+<p>短信内容使用 template + data</p>
+<pre><code>&apos;aliyunrest&apos; =&gt; [
+    &apos;app_key&apos; =&gt; &apos;&apos;,
+    &apos;app_secret_key&apos; =&gt; &apos;&apos;,
+    &apos;sign_name&apos; =&gt; &apos;&apos;,
+],
+</code></pre><ul>
+<li><code>云片</code></li>
+</ul>
+<p>短信内容使用 content</p>
+<pre><code>&apos;yunpian&apos; =&gt; [
+    &apos;api_key&apos; =&gt; &apos;&apos;,
+],
+</code></pre><ul>
+<li><code>Submail</code></li>
+</ul>
+<p>短信内容使用 data</p>
+<pre><code>&apos;submail&apos; =&gt; [
+    &apos;app_id&apos; =&gt; &apos;&apos;,
+    &apos;app_key&apos; =&gt; &apos;&apos;,
+    &apos;project&apos; =&gt; &apos;&apos;, // 默认 project，可在发送时 data 中指定
+],
+</code></pre><ul>
+<li><code>螺丝帽</code></li>
+</ul>
+<p>短信内容使用 content</p>
+<pre><code>&apos;luosimao&apos; =&gt; [
+    &apos;api_key&apos; =&gt; &apos;&apos;,
+],
+</code></pre><ul>
+<li><code>容联云通讯</code></li>
+</ul>
+<p>短信内容使用 template + data</p>
+<pre><code>&apos;yuntongxun&apos; =&gt; [
+    &apos;app_id&apos; =&gt; &apos;&apos;,
+    &apos;account_sid&apos; =&gt; &apos;&apos;,
+    &apos;account_token&apos; =&gt; &apos;&apos;,
+    &apos;is_sub_account&apos; =&gt; false,
+],
+</code></pre><ul>
+<li><code>互亿无线</code></li>
+</ul>
+<p>短信内容使用 content</p>
+<pre><code>&apos;huyi&apos; =&gt; [
+    &apos;api_id&apos; =&gt; &apos;&apos;,
+    &apos;api_key&apos; =&gt; &apos;&apos;,
+],
+</code></pre><ul>
+<li><code>聚合数据</code></li>
+</ul>
+<p>短信内容使用 template + data</p>
+<pre><code>&apos;juhe&apos; =&gt; [
+    &apos;app_key&apos; =&gt; &apos;&apos;,
+],
+</code></pre><ul>
+<li><code>SendCloud</code></li>
+</ul>
+<p>短信内容使用 template + data</p>
+<pre><code>&apos;sendcloud&apos; =&gt; [
+    &apos;sms_user&apos; =&gt; &apos;&apos;,
+    &apos;sms_key&apos; =&gt; &apos;&apos;,
+    &apos;timestamp&apos; =&gt; false, // 是否启用时间戳
+],
+</code></pre><ul>
+<li><code>百度云</code></li>
+</ul>
+<p>短信内容使用 template + data</p>
+<pre><code>&apos;baidu&apos; =&gt; [
+    &apos;ak&apos; =&gt; &apos;&apos;,
+    &apos;sk&apos; =&gt; &apos;&apos;,
+    &apos;invoke_id&apos; =&gt; &apos;&apos;,
+    &apos;domain&apos; =&gt; &apos;&apos;,
+],
+</code></pre><ul>
+<li><code>华信短信平台</code></li>
+</ul>
+<p>短信内容使用 content</p>
+<pre><code>&apos;huaxin&apos; =&gt; [
+    &apos;user_id&apos;  =&gt; &apos;&apos;,
+    &apos;password&apos; =&gt; &apos;&apos;,
+    &apos;account&apos;  =&gt; &apos;&apos;,
+    &apos;ip&apos;       =&gt; &apos;&apos;,
+    &apos;ext_no&apos;   =&gt; &apos;&apos;,
+],
+</code></pre><ul>
+<li><code>253云通讯（创蓝）</code></li>
+</ul>
+<p>短信内容使用 content</p>
+<pre><code>&apos;chuanglan&apos; =&gt; [
+    &apos;account&apos; =&gt; &apos;&apos;,
+    &apos;password&apos; =&gt; &apos;&apos;,
+
+    // \Overtrue\EasySms\Gateways\ChuanglanGateway::CHANNEL_VALIDATE_CODE  =&gt; 验证码通道（默认）
+    // \Overtrue\EasySms\Gateways\ChuanglanGateway::CHANNEL_PROMOTION_CODE =&gt; 会员营销通道
+    &apos;channel&apos;  =&gt; \Overtrue\EasySms\Gateways\ChuanglanGateway::CHANNEL_VALIDATE_CODE,
+
+    // 会员营销通道 特定参数。创蓝规定：api提交营销短信的时候，需要自己加短信的签名及退订信息
+    &apos;sign&apos; =&gt; &apos;【通讯云】&apos;,
+    &apos;unsubscribe&apos; =&gt; &apos;回TD退订&apos;,
+],
+</code></pre><ul>
+<li><code>融云</code></li>
+</ul>
+<p>短信分为两大类，验证类和通知类短信。 发送验证类短信使用 template + data</p>
+<pre><code>&apos;rongcloud&apos; =&gt; [
+    &apos;app_key&apos; =&gt; &apos;&apos;,
+    &apos;app_secret&apos; =&gt; &apos;&apos;,
+]
+</code></pre><ul>
+<li><code>天毅无线</code></li>
+</ul>
+<p>短信内容使用 content</p>
+<pre><code>&apos;tianyiwuxian&apos; =&gt; [
+    &apos;username&apos; =&gt; &apos;&apos;, //用户名
+    &apos;password&apos; =&gt; &apos;&apos;, //密码
+    &apos;gwid&apos; =&gt; &apos;&apos;, //网关ID
+]
+</code></pre><ul>
+<li><code>twilio</code></li>
+</ul>
+<p>短信使用 content<br>发送对象需要 使用+添加区号</p>
+<pre><code>&apos;twilio&apos; =&gt; [
+    &apos;account_sid&apos; =&gt; &apos;&apos;, // sid
+    &apos;from&apos; =&gt; &apos;&apos;, // 发送的号码 可以在控制台购买
+    &apos;token&apos; =&gt; &apos;&apos;, // apitoken
+],
+</code></pre><ul>
+<li><code>腾讯云 SMS</code></li>
+</ul>
+<p>短信内容使用 content。</p>
+<pre><code>&apos;qcloud&apos; =&gt; [
+    &apos;sdk_app_id&apos; =&gt; &apos;&apos;, // SDK APP ID
+    &apos;app_key&apos; =&gt; &apos;&apos;, // APP KEY
+    &apos;sign_name&apos; =&gt; &apos;&apos;, // 短信签名，如果使用默认签名，该字段可缺省（对应官方文档中的sign）
+],
+</code></pre><ul>
+<li><code>阿凡达数据</code></li>
+</ul>
+<p>短信内容使用 template + data</p>
+<pre><code>&apos;avatardata&apos; =&gt; [
+    &apos;app_key&apos; =&gt; &apos;&apos;, // APP KEY
+],
+</code></pre></the>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/09/26/easy-sms/">easy-sms 短信发送组件使用笔记</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">llilay</a></p>
+        <p><span>发布时间:</span>2018-09-26, 10:33:55</p>
+        <p><span>最后更新:</span>2018-09-26, 11:09:46</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/09/26/easy-sms/" title="easy-sms 短信发送组件使用笔记">http://yoursite.com/2018/09/26/easy-sms/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/09/26/easy-sms/　　作者: llilay" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/09/21/chrome-debugging-tips/">
+                    一些 Chrome 调试技巧
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改-env文件"><span class="toc-number">2.</span> <span class="toc-text">修改.env文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试短信"><span class="toc-number">3.</span> <span class="toc-text">调试短信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#各短信平台配置说明"><span class="toc-number">4.</span> <span class="toc-text">各短信平台配置说明</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"easy-sms 短信发送组件使用笔记　| llilay's blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/09/21/chrome-debugging-tips/" title="下一篇: 一些 Chrome 调试技巧">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/26/easy-sms/">easy-sms 短信发送组件使用笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/chrome-debugging-tips/">一些 Chrome 调试技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/21/laravel-permission/">Laravel多角色用户权限 —— 权限管理扩展包"laravel-permission"</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/hexo-grammar/">hexo 常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/20/create-hexo-github-blog/">使用hexo+github免费搭建个人博客网站</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2018 llilay
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
